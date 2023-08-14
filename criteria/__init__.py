@@ -1,0 +1,1 @@
+from .kd import KDLoss, JSDLoss

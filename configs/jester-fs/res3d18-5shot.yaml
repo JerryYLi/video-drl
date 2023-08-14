@@ -1,0 +1,41 @@
+dataset:
+  name: jester_fs
+  ep_per_batch: 1
+  n_batch: 1000
+  n_way: 5
+  n_shot: 5
+  n_query: 5
+
+  transform:
+    resize: 112
+    crop: 112
+    hflip: false
+    normalize: 
+      mean: [0.485, 0.456, 0.406]
+      std: [0.229, 0.224, 0.225]
+
+  args:
+    novel:
+      n_clips: 10
+      n_frames: 16
+      fps: 12
+
+model:
+  name: resnet3d
+  freeze_bn: true
+
+  args:
+    n_class: 51
+    model_depth: 18
+    dropout: 0.5
+    ret_feat: 
+      - pool
+
+model_fs:
+  name: CloserBaseline
+  args:
+    method: softmax
+
+criterion:
+  name: CrossEntropyLoss
+  args: {}

@@ -1,0 +1,26 @@
+model: null
+
+shuffle: false
+
+optimizer:
+  name: SGD
+  epochs: 25
+  model_sp:
+    args:
+      lr: 0.01
+      momentum: 0.9
+      weight_decay: 1.0e-4
+  model:
+    args:
+      lr: 0.01
+  
+  schedule:
+    name: StepLR
+    args:
+      step_size: 10
+      gamma: 0.1
+  
+criterion:
+  name: KDLoss
+  lambda: 0.5
+  args: {}

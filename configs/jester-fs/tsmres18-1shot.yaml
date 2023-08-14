@@ -1,0 +1,44 @@
+dataset:
+  name: jester_fs
+  ep_per_batch: 1
+  n_batch: 1000
+  n_way: 5
+  n_shot: 1
+  n_query: 5
+
+  transform:
+    resize: 224
+    crop: 224
+    hflip: false
+    normalize: 
+      mean: [0.485, 0.456, 0.406]
+      std: [0.229, 0.224, 0.225]
+
+  args:
+    novel:
+      n_clips: 10
+      n_frames: 8
+      fps: 6
+
+model:
+  name: tsm
+  freeze_bn: true
+  args:
+    n_class: 51
+    arch: resnet18
+    pretrained: true
+    num_segments: 8
+    shift_div: 8
+    dropout: 0.5
+    ret_feat:
+      - pool
+
+model_fs:
+  name: CloserBaseline
+  args:
+    method: softmax
+
+criterion:
+  name: CrossEntropyLoss
+  args: {}
+  
